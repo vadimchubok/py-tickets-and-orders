@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
 
 
 class User(AbstractUser):
@@ -61,7 +62,7 @@ class MovieSession(models.Model):
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
-        User,
+        to=get_user_model(),
         on_delete=models.CASCADE,
         related_name="orders"
     )
